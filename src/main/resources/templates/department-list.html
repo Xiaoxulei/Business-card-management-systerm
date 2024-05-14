@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部门列表</title>
+</head>
+<body>
+<h1>部门列表</h1>
+<button onclick="openModal()">添加</button>
+<!-- 模态框 -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <h2 style="text-align: center">添加部门</h2>
+        <form action="/department/addDepartment" method="get" style="display: flex; flex-direction: column;">
+            <div class="input_box">
+                <input type="text" id="pname" name="pname" placeholder="部门名称"><br/><br/>
+                <textarea id="premark" name="premark" placeholder="部门备注" style="width: 600px; height: 200px;"></textarea><br/><br/>
+                <button type="submit">添加</button><br/>
+            </div>
+        </form>
+            <button onclick="closeModal()">取消</button>
+    </div>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>部门编号</th>
+        <th>部门名称</th>
+        <th>部门备注</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.pid}"></td>
+        <td th:text="${department.pname}"></td>
+        <td th:text="${department.premark}"></td>
+        <td class="actions">
+            <div class="button-container">
+                <button onclick="openModal()">修改</button>
+                <form id="deleteForm" action="/department/deleteDepartment" method="get">
+                    <input type="hidden" name="pid" value="${department.pid}">
+                    <button type="submit" onclick="deleteDepartment(${department.pid})">删除</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function deleteDepartment(pid) {
+        if (confirm('确定要删除吗？')) {
+            // 在这里可以使用 AJAX 或者将 pid 作为参数提交到后端
+            console.log("要删除的部门编号是：" + pid);
+        }
+    }
+    // 打开模态框函数
+    function openModal() {
+        document.getElementById("modalOverlay").style.display = "block";
+    }
+
+    // 关闭模态框函数
+    function closeModal() {
+        document.getElementById("modalOverlay").style.display = "none";
+    }
+</script>
+<script th:if="${error}">
+    alert("部门已存在");
+</script>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+    th, td {
+        border: 1px solid #dee2e6;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .actions button {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .actions button:hover {
+        background-color: #c82333;
+    }
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+    }
+    .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+</style>

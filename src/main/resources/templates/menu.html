@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Menu</title>
+</head>
+<body>
+<div>
+    <div class="top-bar">
+        <!-- 在这里放置你的 Logo 或其他内容 -->
+        <h1>客户名片管理系统</h1>
+    </div>
+<div class="container">
+    <div class="menu">
+        <ul>
+            <li><a href="/department/departments" target="frame">部门管理</a></li>
+            <li><a href="/userManage" target="frame">客户类型</a></li>
+            <li><a href="/userManage" target="frame">区域管理</a></li>
+            <li><a href="/enrollManage" target="frame">客户信息管理</a></li>
+            <li><a href="/userManage" target="frame">报表管理</a></li>
+            <li><a href="/userManage" target="frame">部门管理</a></li>
+        </ul>
+    </div>
+    <iframe name="frame" style="flex: 1; border: none;"></iframe>
+</div>
+</div>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+
+    }
+    .container {
+        display: flex;
+        height: 100vh;
+        border: 2px solid #000; /* 添加整体边框轮廓 */
+    }
+    .top-bar {
+        background-color: #777;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        border-right: 2px solid #000; /* 添加边框轮廓 */
+        border-bottom: 2px solid #000; /* 添加边框轮廓 */
+    }
+    .menu {
+        background-color: #777;
+        color: #fff;
+        width: 200px;
+        position: relative; /* 使用相对定位 */
+        border-right: 2px solid #000; /* 添加边框轮廓 */
+        border-bottom: 2px solid #000; /* 添加边框轮廓 */
+    }
+    .menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: absolute; /* 使用绝对定位 */
+        top: 0; /* 菜单置顶 */
+        bottom: 0; /* 菜单置底 */
+        left: 0; /* 菜单置左 */
+        right: 0; /* 菜单置右 */
+        overflow-y: auto; /* 超出菜单高度时出现滚动条 */
+    }
+    .menu ul li {
+        padding: 10px;
+        border-bottom: 1px solid #555;
+    }
+    .menu ul li:hover {
+        background-color: #555;
+    }
+    /* 修改链接样式 */
+    .menu ul li a {
+        text-decoration: none; /* 去掉下划线 */
+        color: inherit; /* 继承父元素的颜色 */
+        display: block; /* 让链接占据整个列表项的空间 */
+        padding: 10px;
+    }
+    .menu ul li a:hover {
+        background-color: #555;
+        color: #fff; /* 修改鼠标悬停时的颜色 */
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+        border-bottom: 2px solid #000; /* 添加边框轮廓 */
+    }
+</style>
